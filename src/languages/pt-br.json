@@ -1,0 +1,26 @@
+{
+  "navbar": {
+    "colonies": "Colônias"
+  },
+  "titles": {},
+  "labels": {},
+  "messages": {
+    "invalidLogin": "Senha ou e-mail inválido.",
+    "lostPassword": "Esqueceu sua senha?",
+    "recoverPassword": "Recupere a sua senha"
+  },
+  "placeholders": {
+    "user": "Usuário",
+    "email": "Email",
+    "password": "Senha"
+  },
+  "buttons": {
+    "send": "Enviar",
+    "back": "Voltar",
+    "save": "Salvar",
+    "login": "Entrar",
+    "logout": "Sair",
+    "cancel": "Cancelar",
+    "ok": "OK"
+  }
+}

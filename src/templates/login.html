@@ -1,0 +1,25 @@
+<div class="pop-login">
+  <div class="login-page">
+    <div class="form">
+      <span class="main-title">EVE Planetary</span>
+      <form ng-if="!formLogin" class="register-form">
+        <input type="text" placeholder="{{ translator.translate('placeholders', 'email') }}"/>
+        <button><translate section="buttons" text="send"></translate></button>
+        <p class="message"><a ng-click="toggleRecoverForm()"><translate section="buttons" text="back"></a></p>
+      </form>
+
+      <form ng-if="formLogin" name="formLogin" class="login-form" ng-submit="logingIn()" novalidate>
+        <input type="text" placeholder="{{ translator.translate('placeholders', 'user') }}" ng-model="login.username" required/>
+        <input type="password" placeholder="{{ translator.translate('placeholders', 'password') }}" ng-model="login.password" required/>
+        <button class="button" type="submit" ng-disabled="loginLoad">
+          <i class="fa" ng-class="{'fa-spinner fa-spin': loginLoad}"></i> <translate section="buttons" text="login"></translate>
+        </button>
+        <div class="alert alert-danger animate-show-hide" ng-if="loginFail">
+          <a class="close" data-dismiss="alert" aria-label="close">×</a>
+          <strong> <translate section="messages" text="invalidLogin"></translate></strong>
+        </div>
+        <p class="message"><translate section="messages" text="lostPassword"></translate> <a ng-click="toggleRecoverForm()"><translate section="messages" text="recoverPassword"></translate></a></p>
+      </form>
+    </div>
+  </div>
+</div>

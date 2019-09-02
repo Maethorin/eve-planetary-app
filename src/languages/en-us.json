@@ -1,0 +1,26 @@
+{
+  "navbar": {
+    "colonies": "Colonies"
+  },
+  "titles": {},
+  "labels": {},
+  "messages": {
+    "invalidLogin": "Invalid login data",
+    "lostPassword": "Forgot password?",
+    "recoverPassword": "Recover password"
+  },
+  "placeholders": {
+    "user": "User",
+    "email": "Email",
+    "password": "Password"
+  },
+  "buttons": {
+    "send": "Send",
+    "back": "Back",
+    "save": "Save",
+    "login": "Login",
+    "logout": "Logout",
+    "cancel": "Cancel",
+    "ok": "OK"
+  }
+}
