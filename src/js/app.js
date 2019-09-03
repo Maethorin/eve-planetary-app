@@ -52,6 +52,16 @@ Number.prototype.paddingLeft = function(size, char) {
   return result.join('') + this.toString();
 };
 
+function createEVEState(){
+    var dt = new Date().getTime();
+    return 'xxxxxxyxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = (dt + Math.random()*16)%16 | 0;
+        dt = Math.floor(dt/16);
+        return (c === 'x' ? r :(r&0x3|0x8)).toString(16);
+    });
+}
+
+
 var evePlanetaryServices  = angular.module('evePlanetary.services', []);
 var evePlanetaryFactories  = angular.module('evePlanetary.factories', []);
 var evePlanetaryResources  = angular.module('evePlanetary.resources', []);
@@ -79,7 +89,8 @@ var evePlanetary = angular.module(
 
 evePlanetary.constant('appConfig', {
   backendURL: '@@backendURL',
-  env: '@@env'
+  env: '@@env',
+  eveClientId: '@@eveClientId'
 });
 
 evePlanetary.config(['$httpProvider', '$stateProvider', '$locationProvider', '$urlRouterProvider', function($httpProvider, $stateProvider, $locationProvider, $urlRouterProvider) {
@@ -107,6 +118,13 @@ evePlanetary.config(['$httpProvider', '$stateProvider', '$locationProvider', '$u
     })
 
     .state({
+      name: 'eve-auth',
+      url: '/eve-auth',
+      templateUrl: 'templates/eve-auth.html',
+      controller: 'EVEAuthController'
+    })
+
+    .state({
       name: 'logout',
       url: '/logout',
       controller: 'LogoutController'
@@ -120,7 +138,7 @@ evePlanetary.config(['$httpProvider', '$stateProvider', '$locationProvider', '$u
       controller: 'ColoniesController'
     });
 
-  $urlRouterProvider.when('', '/colonies');
+  $urlRouterProvider.when('', '/');
 }]);
 
 evePlanetary.run(['$rootScope', '$http', 'appConfig', 'AuthService', 'MeService', 'TranslateService', function($rootScope, $http, appConfig, AuthService, MeService, TranslateService) {

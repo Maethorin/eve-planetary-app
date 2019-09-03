@@ -172,8 +172,8 @@ module.exports = function (grunt) {
               replacement: '<%= grunt.file.readJSON("config/development.json").backendURL %>'
             },
             {
-              match: 'fbiURL',
-              replacement: '<%= grunt.file.readJSON("config/development.json").fbiURL %>'
+              match: 'eveClientId',
+              replacement: '<%= grunt.file.readJSON("config/development.json").eveClientId %>'
             }
           ]
         },
@@ -198,8 +198,8 @@ module.exports = function (grunt) {
               replacement: '<%= grunt.file.readJSON("config/sandbox.json").backendURL %>'
             },
             {
-              match: 'fbiURL',
-              replacement: '<%= grunt.file.readJSON("config/sandbox.json").fbiURL %>'
+              match: 'eveClientId',
+              replacement: '<%= grunt.file.readJSON("config/sandbox.json").eveClientId %>'
             }
           ]
         },
@@ -224,8 +224,8 @@ module.exports = function (grunt) {
               replacement: '<%= grunt.file.readJSON("config/staging.json").backendURL %>'
             },
             {
-              match: 'fbiURL',
-              replacement: '<%= grunt.file.readJSON("config/staging.json").fbiURL %>'
+              match: 'eveClientId',
+              replacement: '<%= grunt.file.readJSON("config/staging.json").eveClientId %>'
             }
           ]
         },
@@ -250,8 +250,8 @@ module.exports = function (grunt) {
               replacement: '<%= grunt.file.readJSON("config/production.json").backendURL %>'
             },
             {
-              match: 'fbiURL',
-              replacement: '<%= grunt.file.readJSON("config/production.json").fbiURL %>'
+              match: 'eveClientId',
+              replacement: '<%= grunt.file.readJSON("config/production.json").eveClientId %>'
             }
           ]
         },

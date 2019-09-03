@@ -1,0 +1,58 @@
+<div class="container-fluid eve-auth">
+  <div class="row">
+    <div class="alert alert-info" ng-if="redirecting">
+      <p>You don't have an EVE Account yet. You need to add an account do use EVE Planetary Helper</p>
+      <p>You will be directed to <strong>login.eveonline.com</strong> for authorization. You will be redirect to this page after authorizing complete.</p>
+      <p>Redirecting in {{ redirectTimer }} seconds...</p>
+    </div>
+
+    <div class="alert alert-warning" ng-if="continueAuthorizing">
+      <div class="col-md-6">
+        <p>Hold on! We are finishing the authorization process. We need your EVE username!</p>
+        <p>Youn need to complete this step in {{ eveAuthCodeExpiration }} minutes before the EVE initial authorization expires.</p>
+        <p>If this time ends, you will be direct to EVE Authorization Page again. We are persistent!</p>
+      </div>
+      <div class="form-group col-md-3">
+        <input type="text" class="form-control" placeholder="Your EVE username" ng-model="account.username" />
+      </div>
+      <div class="col-md-3">
+        <button type="button" class="btn btn-success" ng-click="continueAuthorization()"><i class="fa fa-user"></i> Complete my Account</button>
+      </div>
+    </div>
+
+    <div class="alert alert-success" ng-if="hasAccounts">
+      <div class="col-md-12">Your already have accounts! Choose one to load your Planetary Interaction Data.</div>
+      <ul class="list-group col-md-12">
+        <li class="list-group-item list-title">
+          <div class="col-md-4 item-title">Username</div>
+          <div class="col-md-8 item-title">Character</div>
+        </li>
+        <li class="list-group-item" ng-repeat="account in accounts">
+          <div class="col-md-4" ng-bind="account.username"></div>
+          <div class="col-md-8">
+            <div class="character-list" ng-repeat="character in account.characters">
+              <div class="col-md-8">
+                <span class="character-name" ng-bind="character.name"></span>
+              </div>
+              <div class="col-md-4">
+                <button type="button" class="btn btn-success" ng-click="loadCharacterPlanetaryData(account, character)"><i class="fa fa-globe"></i> Load Planetary Data</button>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="alert alert-success" ng-if="planeting">
+      <div class="col-md-12">Your account has beem created! Now, we need to load your Planetary Interaction Data.</div>
+      <ul class="list-group col-md-12">
+        <li class="list-group-item" ng-repeat="character in account.characters">
+          <div class="col-md-8" ng-bind="character.name"></div>
+          <div class="col-md-4">
+            <button type="button" class="btn btn-success" ng-click="loadCharacterPlanetaryData(account, character)"><i class="fa fa-globe"></i> Load Planetary Data</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

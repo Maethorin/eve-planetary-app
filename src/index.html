@@ -23,7 +23,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">MUAMS</a>
+          <a class="navbar-brand" href="#">EVE PI Helper</a>
         </div>
 
         <div class="collapse navbar-collapse" id="main-navbar">
@@ -45,6 +45,7 @@
               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello {{loggedUser.name}} <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a ng-click="showMyInfo()">My Info</a></li>
+                <li><a ui-sref="eve-auth">Authorize EVE</a></li>
                 <li><a ui-sref="logout">Logout</a></li>
               </ul>
             </li>

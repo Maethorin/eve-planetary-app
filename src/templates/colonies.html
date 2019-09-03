@@ -17,8 +17,10 @@
             <div class="col-md-12" ng-repeat="refinedCommodity in colony.refinedCommodities">
               <div class="col-md-4">
                 <h3>Refined Commodities</h3>
-                <span ng-bind="refinedCommodity.name"></span>:
-                <span ng-bind="refinedCommodity.quantity"></span>
+                <span class="col-md-6" ng-bind="refinedCommodity.name"></span>
+                <div class="col-md-3 form-group">
+                  <input type="number" class="form-control item-quantity" ng-model="refinedCommodity.quantity" />
+                </div>
               </div>
               <div class="col-md-4">
                 <h3>Processed Materials</h3>
@@ -61,19 +63,41 @@
             </div>
           </div>
 
-          <div class="col-md-12">
-            <div class="form-group col-md-3">
-              <button type="button" ng-click="saveColony(colony)" class="btn btn-success">Save Colony</button>
-            </div>
+          <div class="col-md-12 save-colony-row">
+            <button type="button" ng-click="saveColony(colony)" class="btn btn-success"><i class="fa fa-save"></i> Save Colony</button>
           </div>
 
-          <div class="col-md-12">
-            <div class="form-group col-md-4">
-              <label for="productionTarget">Production Target</label>
-              <input type="number" id="productionTarget" name="productionTarget" class="form-control" ng-model="colony.productionTarget" />
+          <div class="col-md-12 calculate-colony-row">
+            <h3>Production target: USING: {{ colony.useAsProductionTarget }}</h3>
+            <div class="form-group col-md-3">
+              <label for="productionTarget">Refined Commodities</label>
+              <div class="input-group">
+                <input type="number" id="productionTarget" name="productionTarget" class="form-control" ng-model="colony.productionTarget" />
+                <span class="input-group-addon">
+                  <input type="radio" name="useProductionTarget" ng-model="colony.useAsProductionTarget" value="refined_commodities" aria-label="...">
+                </span>
+              </div>
             </div>
             <div class="form-group col-md-3">
-              <button type="button" ng-click="calculateRawResource(colony)" class="btn btn-success">Calculate</button>
+              <label for="productionTarget">Processed Materials</label>
+              <div class="input-group">
+                <input type="number" id="productionTarget" name="productionTarget" class="form-control" ng-model="colony.productionTarget" />
+                <span class="input-group-addon">
+                  <input type="radio" name="useProductionTarget" ng-model="colony.useAsProductionTarget" value="processed_materials" aria-label="...">
+                </span>
+              </div>
+            </div>
+            <div class="form-group col-md-3">
+              <label for="productionTarget">Raw Resources</label>
+              <div class="input-group">
+                <input type="number" id="productionTarget" name="productionTarget" class="form-control" ng-model="colony.productionTarget" />
+                <span class="input-group-addon">
+                  <input type="radio" name="useProductionTarget" ng-model="colony.useAsProductionTarget" value="raw_resources" aria-label="...">
+                </span>
+              </div>
+            </div>
+            <div class="form-group col-md-3">
+              <button type="button" ng-click="calculateRawResource(colony)" class="btn btn-success btn-calculate"><i class="fa fa-calculator"></i> Calculate</button>
             </div>
           </div>
         </div>

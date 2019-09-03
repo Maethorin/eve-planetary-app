@@ -1,4 +1,5 @@
 {
   "env": "test",
-  "backendURL": "http://localhost:3001"
+  "backendURL": "http://localhost:3001",
+  "eveClientId": "GBAGBAGABAGABAG"
 }

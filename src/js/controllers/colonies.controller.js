@@ -1,6 +1,6 @@
 'use strict';
 
-evePlanetaryControllers.controller('ColoniesController', ['$rootScope', '$scope', 'MeService', 'Colony', 'ColonyCalculate', function($rootScope, $scope, MeService, Colony, ColonyCalculate) {
+evePlanetaryControllers.controller('ColoniesController', ['$rootScope', '$scope', 'MeService', 'Colony', function($rootScope, $scope, MeService, Colony) {
   MeService.getInfo().then(
     function(userInfo) {
       Colony.query(
@@ -56,11 +56,11 @@ evePlanetaryControllers.controller('ColoniesController', ['$rootScope', '$scope'
   };
 
   $scope.calculateRawResource = function(colony) {
-    var getObject = {colonyId: colony.id};
+    var getObject = {accountId: $scope.account.id, characterId: $scope.character.id, colonyId: colony.id, calculate: true};
     if (colony.productionTarget !== null) {
       getObject.productionTarget = colony.productionTarget;
     }
-    ColonyCalculate.get(
+    Colony.get(
       getObject,
 
       function(result) {

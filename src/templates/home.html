@@ -1,3 +1,60 @@
 <div class="container-fluid">
+  <div class="row">
 
+    <div class="col-md-12">
+      <h2>Refined Commodities</h2>
+      <ul class="list-group col-md-12">
+        <li class="list-group-item" ng-repeat="refinedCommodity in refinedCommodities">
+          <div class="col-md-3 planetary-data">
+            <div class="col-md-2 planetary-quantity">{{ refinedCommodity.outputQuantity }} x</div>
+            <div class="col-md-8">
+              <span class="col-md-12"><img ng-src="{{refinedCommodity.imageUrl}}" alt="" /></span>
+              <span class="col-md-12 planetary-name" ng-bind="refinedCommodity.name"></span>
+            </div>
+            <div class="col-md-2 planetary-quantity">=</div>
+          </div>
+
+          <div class="col-md-9">
+            <ul class="list-group col-md-12">
+              <li class="list-group-item">
+                <div class="col-md-6 planetary-data">
+                  <div class="col-md-2 planetary-quantity">{{ refinedCommodity.firstInputQuantity }} x</div>
+                  <div class="col-md-8">
+                    <span class="col-md-12"><img ng-src="{{refinedCommodity.firstInput.imageUrl}}" alt="" /></span>
+                    <span class="col-md-12 planetary-name" ng-bind="refinedCommodity.firstInput.name"></span>
+                  </div>
+                  <div class="col-md-2 planetary-quantity">x {{ refinedCommodity.firstInput.outputQuantity }} =</div>
+                </div>
+
+                <div class="col-md-6 planetary-data">
+                  <div class="col-md-2 planetary-quantity">{{ refinedCommodity.firstInput.inputQuantity }} x</div>
+                  <div class="col-md-10">
+                    <span class="col-md-12"><img ng-src="{{refinedCommodity.firstInput.input.imageUrl}}" alt="" /></span>
+                    <span class="col-md-12 planetary-name" ng-bind="refinedCommodity.firstInput.input.name"></span>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item planetary-data">
+                <div class="col-md-6">
+                  <div class="col-md-2 planetary-quantity">{{ refinedCommodity.secondInputQuantity }} x</div>
+                  <div class="col-md-8">
+                    <span class="col-md-12"><img ng-src="{{refinedCommodity.secondInput.imageUrl}}" alt="" /></span>
+                    <span class="col-md-12 planetary-name" ng-bind="refinedCommodity.secondInput.name"></span>
+                  </div>
+                  <div class="col-md-2 planetary-quantity">x {{ refinedCommodity.secondInput.outputQuantity }} =</div>
+                </div>
+                <div class="col-md-6 planetary-data">
+                  <div class="col-md-2 planetary-quantity">{{ refinedCommodity.secondInput.inputQuantity }} x</div>
+                  <div class="col-md-10">
+                    <span class="col-md-12"><img ng-src="{{refinedCommodity.secondInput.input.imageUrl}}" alt="" /></span>
+                    <span class="col-md-12 planetary-name" ng-bind="refinedCommodity.secondInput.input.name"></span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
