@@ -2,7 +2,8 @@
   <div class="row" ng-repeat="account in accounts">
     <h1>Account: <span ng-bind="account.username"></span></h1>
     <div class="col-md-12" ng-repeat="character in account.characters">
-      <h2>Character: <span ng-bind="character.name"></span></h2>
+      <h2>Character:</h2>
+      <h3><img ng-src="{{ character.portraitUrl }}" alt="" width="64"> <span ng-bind="character.name"></span></h3>
       <div class="col-md-12" ng-repeat="colony in character.colonies">
         <div class="panel panel-default">
           <div class="panel-heading">

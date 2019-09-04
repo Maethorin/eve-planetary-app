@@ -33,6 +33,7 @@
           <div class="col-md-8">
             <div class="character-list" ng-repeat="character in account.characters">
               <div class="col-md-8">
+                <img ng-src="{{ character.portraitUrl }}" alt="" width="64">
                 <span class="character-name" ng-bind="character.name"></span>
               </div>
               <div class="col-md-4">
@@ -48,7 +49,10 @@
       <div class="col-md-12">Your account has beem created! Now, we need to load your Planetary Interaction Data.</div>
       <ul class="list-group col-md-12">
         <li class="list-group-item" ng-repeat="character in account.characters">
-          <div class="col-md-8" ng-bind="character.name"></div>
+          <div class="col-md-8">
+            <img ng-src="{{ character.portraitUrl }}" alt="" width="64">
+            <span class="character-name" ng-bind="character.name"></span>
+          </div>
           <div class="col-md-4">
             <button type="button" class="btn btn-success" ng-click="loadCharacterPlanetaryData(account, character)"><i class="fa fa-globe"></i> Load Planetary Data</button>
           </div>
