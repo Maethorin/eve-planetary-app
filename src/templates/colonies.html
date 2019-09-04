@@ -1,103 +1,107 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12" ng-repeat="colony in colonies">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h2>
-            <span class="player-name" ng-bind="colony.playerName"></span>
-            <span class="system-name" ng-bind="colony.systemName"></span>
-            <span class="planet-name" ng-bind="colony.planetName"></span>
-            <span ng-click="selectColony(colony)" class="colony-chevron">
-              <i class="fa" ng-class="{'fa-spinner fa-spin': colony.loading, 'fa-chevron-up': colony.isOpen, 'fa-chevron-down': !colony.isOpen}"></i>
-            </span>
-          </h2>
-        </div>
-        <div class="panel-body" uib-collapse="!colony.isOpen">
-          <div class="col-md-12">
-            <div class="col-md-12" ng-repeat="refinedCommodity in colony.refinedCommodities">
-              <div class="col-md-4">
-                <h3>Refined Commodities</h3>
-                <span class="col-md-6" ng-bind="refinedCommodity.name"></span>
-                <div class="col-md-3 form-group">
-                  <input type="number" class="form-control item-quantity" ng-model="refinedCommodity.quantity" />
-                </div>
-              </div>
-              <div class="col-md-4">
-                <h3>Processed Materials</h3>
-                <div class="col-md-12">
-                  <ul class="list-group">
-                    <li class="list-group-item list-title">
-                      <span class="col-md-6 item-title">Name</span>
-                      <span class="col-md-3 item-title">Quantity</span>
-                      <span class="col-md-3 item-title">Prod. Target</span>
-                    </li>
-                    <li class="list-group-item" ng-repeat="processedMaterial in refinedCommodity.processedMaterials">
-                      <span class="col-md-6 item-name" ng-bind="processedMaterial.name"></span>
-                      <div class="col-md-3 form-group">
-                        <input type="number" class="form-control item-quantity" ng-model="processedMaterial.quantity" />
-                      </div>
-                      <span class="col-md-3 item-quantity" ng-bind="processedMaterial.productionTarget|number:0"></span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <h3>Raw Resource</h3>
-                <div class="col-md-12">
-                  <ul class="list-group">
-                    <li class="list-group-item list-title">
-                      <span class="col-md-6 item-title">Name</span>
-                      <span class="col-md-3 item-title">Quantity</span>
-                      <span class="col-md-3 item-title">Prod. Target</span>
-                    </li>
-                    <li class="list-group-item" ng-repeat="processedMaterial in refinedCommodity.processedMaterials">
-                      <span class="col-md-6 item-name" ng-bind="processedMaterial.rawResource.name"></span>
-                      <div class="col-md-3 form-group">
-                        <input type="number" class="form-control item-quantity" ng-model="processedMaterial.rawResource.quantity" />
-                      </div>
-                      <span class="col-md-3 item-quantity" ng-bind="processedMaterial.rawResource.productionTarget|number:0"></span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+  <div class="row" ng-repeat="account in accounts">
+    <h1>Account: <span ng-bind="account.username"></span></h1>
+    <div class="col-md-12" ng-repeat="character in account.characters">
+      <h2>Character: <span ng-bind="character.name"></span></h2>
+      <div class="col-md-12" ng-repeat="colony in character.colonies">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3>
+              <span class="player-name" ng-bind="colony.playerName"></span>
+              <span class="system-name" ng-bind="colony.systemName"></span>
+              <span class="planet-name" ng-bind="colony.planetName"></span>
+              <span ng-click="selectColony(account, character, colony)" class="colony-chevron">
+                <i class="fa" ng-class="{'fa-spinner fa-spin': colony.loading, 'fa-chevron-up': colony.isOpen, 'fa-chevron-down': !colony.isOpen}"></i>
+              </span>
+            </h3>
           </div>
+          <div class="panel-body" uib-collapse="!colony.isOpen">
+            <div class="col-md-12">
+              <div class="col-md-12" ng-repeat="refinedCommodity in colony.refinedCommodities">
+                <div class="col-md-4">
+                  <h4>Refined Commodities</h4>
+                  <span class="col-md-6"><img ng-src="{{ refinedCommodity.imageUrl }}" alt=""> <span ng-bind="refinedCommodity.name"></span></span>
+                  <div class="col-md-3 form-group">
+                    <input type="number" class="form-control item-quantity" ng-model="refinedCommodity.quantity" />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <h4>Processed Materials</h4>
+                  <div class="col-md-12">
+                    <ul class="list-group">
+                      <li class="list-group-item list-title">
+                        <span class="col-md-6 item-title">Name</span>
+                        <span class="col-md-3 item-title">Quantity</span>
+                        <span class="col-md-3 item-title">Prod. Target</span>
+                      </li>
+                      <li class="list-group-item" ng-repeat="processedMaterial in refinedCommodity.processedMaterials">
+                        <span class="col-md-6 item-name"><img ng-src="{{ processedMaterial.imageUrl }}" alt=""> <span ng-bind="processedMaterial.name"></span></span>
+                        <div class="col-md-3 form-group">
+                          <input type="number" class="form-control item-quantity" ng-model="processedMaterial.quantity" />
+                        </div>
+                        <span class="col-md-3 item-quantity" ng-bind="processedMaterial.productionTarget|number:0"></span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <h4>Raw Resource</h4>
+                  <div class="col-md-12">
+                    <ul class="list-group">
+                      <li class="list-group-item list-title">
+                        <span class="col-md-6 item-title">Name</span>
+                        <span class="col-md-3 item-title">Quantity</span>
+                        <span class="col-md-3 item-title">Prod. Target</span>
+                      </li>
+                      <li class="list-group-item" ng-repeat="processedMaterial in refinedCommodity.processedMaterials">
+                        <span class="col-md-6 item-name"><img ng-src="{{ processedMaterial.rawResource.imageUrl }}" alt=""> <span ng-bind="processedMaterial.rawResource.name"></span></span>
+                        <div class="col-md-3 form-group">
+                          <input type="number" class="form-control item-quantity" ng-model="processedMaterial.rawResource.quantity" />
+                        </div>
+                        <span class="col-md-3 item-quantity" ng-bind="processedMaterial.rawResource.productionTarget|number:0"></span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-          <div class="col-md-12 save-colony-row">
-            <button type="button" ng-click="saveColony(colony)" class="btn btn-success"><i class="fa fa-save"></i> Save Colony</button>
-          </div>
+            <!--div class="col-md-12 save-colony-row">
+              <button type="button" ng-click="saveColony(colony)" class="btn btn-success"><i class="fa fa-save"></i> Save Colony</button>
+            </div-->
 
-          <div class="col-md-12 calculate-colony-row">
-            <h3>Production target: USING: {{ colony.useAsProductionTarget }}</h3>
-            <div class="form-group col-md-3">
-              <label for="productionTarget">Refined Commodities</label>
-              <div class="input-group">
-                <input type="number" id="productionTarget" name="productionTarget" class="form-control" ng-model="colony.productionTarget" />
-                <span class="input-group-addon">
-                  <input type="radio" name="useProductionTarget" ng-model="colony.useAsProductionTarget" value="refined_commodities" aria-label="...">
-                </span>
+            <div class="col-md-12 calculate-colony-row" ng-class="{'calculating': calculating}">
+              <h3>Production target:</h3>
+              <div class="form-group col-md-3">
+                <label for="productionTarget">Refined Commodities</label>
+                <div class="input-group">
+                  <input type="number" ng-disabled="calculating" id="productionTarget" name="productionTarget" class="form-control" ng-model="colony.productionTarget" />
+                  <span class="input-group-addon">
+                    <input type="radio" ng-disabled="calculating" name="useProductionTarget" ng-model="colony.useAsProductionTarget" value="refined_commodities" aria-label="...">
+                  </span>
+                </div>
               </div>
-            </div>
-            <div class="form-group col-md-3">
-              <label for="productionTarget">Processed Materials</label>
-              <div class="input-group">
-                <input type="number" id="productionTarget" name="productionTarget" class="form-control" ng-model="colony.productionTarget" />
-                <span class="input-group-addon">
-                  <input type="radio" name="useProductionTarget" ng-model="colony.useAsProductionTarget" value="processed_materials" aria-label="...">
-                </span>
+              <div class="form-group col-md-3">
+                <label for="productionTarget">Processed Materials</label>
+                <div class="input-group">
+                  <input type="number" ng-disabled="calculating" id="productionTarget" name="productionTarget" class="form-control" ng-model="colony.productionTarget" />
+                  <span class="input-group-addon">
+                    <input type="radio" ng-disabled="calculating" name="useProductionTarget" ng-model="colony.useAsProductionTarget" value="processed_materials" aria-label="...">
+                  </span>
+                </div>
               </div>
-            </div>
-            <div class="form-group col-md-3">
-              <label for="productionTarget">Raw Resources</label>
-              <div class="input-group">
-                <input type="number" id="productionTarget" name="productionTarget" class="form-control" ng-model="colony.productionTarget" />
-                <span class="input-group-addon">
-                  <input type="radio" name="useProductionTarget" ng-model="colony.useAsProductionTarget" value="raw_resources" aria-label="...">
-                </span>
+              <div class="form-group col-md-3">
+                <label for="productionTarget">Raw Resources</label>
+                <div class="input-group">
+                  <input type="number" ng-disabled="calculating" id="productionTarget" name="productionTarget" class="form-control" ng-model="colony.productionTarget" />
+                  <span class="input-group-addon">
+                    <input type="radio" ng-disabled="calculating" name="useProductionTarget" ng-model="colony.useAsProductionTarget" value="raw_resources" aria-label="...">
+                  </span>
+                </div>
               </div>
-            </div>
-            <div class="form-group col-md-3">
-              <button type="button" ng-click="calculateRawResource(colony)" class="btn btn-success btn-calculate"><i class="fa fa-calculator"></i> Calculate</button>
+              <div class="form-group col-md-3">
+                <button type="button" ng-disabled="calculating" ng-click="calculateRawResource(account, character, colony)" class="btn btn-success btn-calculate"><i class="fa fa-calculator"></i> Calculate</button>
+              </div>
             </div>
           </div>
         </div>

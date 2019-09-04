@@ -1,27 +1,38 @@
 'use strict';
 
 evePlanetaryControllers.controller('ColoniesController', ['$rootScope', '$scope', 'MeService', 'Colony', function($rootScope, $scope, MeService, Colony) {
+  $scope.accounts = [];
+  $scope.calculating = false;
+
   MeService.getInfo().then(
     function(userInfo) {
-      Colony.query(
-        function(result) {
-          $scope.colonies = result;
-        },
-        function(error) {
-          console.log(error);
-        }
-      )
+      _.forEach(userInfo.accounts, function(account) {
+        $scope.accounts.push(account);
+        _.forEach(account.characters, function(character) {
+          Colony.query(
+            {accountId: account.id, characterId: character.id},
+
+            function(result) {
+              character.colonies = result;
+            },
+
+            function(error) {
+              console.log(error);
+            }
+          )
+        });
+      });
     }
   );
 
-  $scope.selectColony = function(colony) {
+  $scope.selectColony = function(account, character, colony) {
     if (colony.loaded) {
       colony.isOpen = !colony.isOpen;
       return;
     }
     colony.loading = true;
     Colony.get(
-      {colonyId: colony.id},
+      {accountId: account.id, characterId: character.id, colonyId: colony.id},
 
       function(colonyResult) {
         colony.refinedCommodities = colonyResult.refinedCommodities;
@@ -55,8 +66,9 @@ evePlanetaryControllers.controller('ColoniesController', ['$rootScope', '$scope'
     )
   };
 
-  $scope.calculateRawResource = function(colony) {
-    var getObject = {accountId: $scope.account.id, characterId: $scope.character.id, colonyId: colony.id, calculate: true};
+  $scope.calculateRawResource = function(account, character, colony) {
+    $scope.calculating = true;
+    var getObject = {accountId: account.id, characterId: character.id, colonyId: colony.id, calculate: true};
     if (colony.productionTarget !== null) {
       getObject.productionTarget = colony.productionTarget;
     }
@@ -73,11 +85,13 @@ evePlanetaryControllers.controller('ColoniesController', ['$rootScope', '$scope'
                 processedMaterial.rawResource.productionTarget = calculate.extractionNeeded;
               }
             })
-          })
+          });
+          $scope.calculating = false;
         });
       },
 
       function(error) {
+        $scope.calculating = false;
         console.log(error);
       }
 
