@@ -60,17 +60,23 @@ evePlanetaryControllers.controller('EVEAuthController', ['$rootScope', 'appConfi
       $scope.account,
 
       function(result) {
+        $interval.cancel($scope.timerAuthCodeInterval);
+        localStorage.removeItem('eveState');
         $scope.continueAuthorizing = false;
         $scope.planeting = true;
         $scope.account = result;
-        localStorage.removeItem('eveState');
-        $interval.cancel($scope.timerAuthCodeInterval);
+        $window.location.search = '';
       },
 
       function(error) {
         console.log(error);
       }
     );
+  };
+
+  $scope.addAnotherAccount = function() {
+    $window.location.search = '';
+    redirectToSecureEve();
   };
 
   $scope.loadCharacterPlanetaryData = function(account, character) {

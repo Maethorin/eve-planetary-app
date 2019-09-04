@@ -1,7 +1,7 @@
 <div class="container-fluid eve-auth">
   <div class="row">
     <div class="alert alert-info" ng-if="redirecting">
-      <p>You don't have an EVE Account yet. You need to add an account do use EVE Planetary Helper</p>
+      <p>Adding an account do use EVE Planetary Helper</p>
       <p>You will be directed to <strong>login.eveonline.com</strong> for authorization. You will be redirect to this page after authorizing complete.</p>
       <p>Redirecting in {{ redirectTimer }} seconds...</p>
     </div>
@@ -22,6 +22,7 @@
 
     <div class="alert alert-success" ng-if="hasAccounts">
       <div class="col-md-12">Your already have accounts! Choose one to load your Planetary Interaction Data.</div>
+      <div class="col-md-12"><button class="btn btn-success" ng-click="addAnotherAccount()"><i class="fa fa-user"></i> Add Another Account</button></div>
       <ul class="list-group col-md-12">
         <li class="list-group-item list-title">
           <div class="col-md-4 item-title">Username</div>
