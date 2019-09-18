@@ -1,22 +1,9 @@
 @import "fontawesome/scss/font-awesome";
 @import "bootstrap-sass/assets/stylesheets/bootstrap";
+@import "notifier";
 @import "login";
 
 $cor-azul: #3fa0e8;
-
-.fa-spinner {
-  font-size: 5em;
-  color: #337ab7;
-  bottom: 50%;
-  left: 50%;
-  position: fixed;
-}
-
-//h2 {
-//  font-size: 15px;
-//  font-weight: bold;
-//  margin: 0;
-//}
 
 label {
   font-weight: normal;

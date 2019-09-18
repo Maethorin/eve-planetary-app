@@ -37,7 +37,7 @@
                 <span class="character-name" ng-bind="character.name"></span>
               </div>
               <div class="col-md-4">
-                <button type="button" class="btn btn-success" ng-click="loadCharacterPlanetaryData(account, character)"><i class="fa fa-globe"></i> Load Planetary Data</button>
+                <button type="button" class="btn btn-success" ng-disabled="character.loading" ng-click="loadCharacterPlanetaryData(account, character)"><i class="fa" ng-class="{'fa-spinner fa-spin': character.loading, 'fa-globe': !character.loading}"></i> Load Planetary Data</button>
               </div>
             </div>
           </div>

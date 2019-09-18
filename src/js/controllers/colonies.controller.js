@@ -1,6 +1,6 @@
 'use strict';
 
-evePlanetaryControllers.controller('ColoniesController', ['$rootScope', '$scope', 'MeService', 'Colony', function($rootScope, $scope, MeService, Colony) {
+evePlanetaryControllers.controller('ColoniesController', ['$rootScope', '$scope', 'Notifier', 'MeService', 'Colony', function($rootScope, $scope, Notifier, MeService, Colony) {
   $scope.accounts = [];
   $scope.calculating = false;
 
@@ -14,10 +14,12 @@ evePlanetaryControllers.controller('ColoniesController', ['$rootScope', '$scope'
 
             function(result) {
               character.colonies = result;
+              Notifier.success('All Colonies loaded!', 'Colonies Loaded')
             },
 
             function(error) {
               console.log(error);
+              Notifier.danger('Something when very bad loading colonies. If you are a developer, you know what to do.', 'On No!')
             }
           )
         });
@@ -49,24 +51,51 @@ evePlanetaryControllers.controller('ColoniesController', ['$rootScope', '$scope'
     );
   };
 
-  $scope.saveColony = function(colony) {
+  $scope.saveColony = function(account, character, colony) {
+    colony.loading = true;
     Colony.update(
-      {colonyId: colony.id},
+      {accountId: account.id, characterId: character.id, colonyId: colony.id},
 
       colony,
 
       function(result) {
-
+        colony.loading = false;
+        Notifier.success('Your Colony was saved with success!', 'Colony Saved')
       },
 
       function(error) {
         console.log(error);
+        colony.loading = false;
+        Notifier.danger('Something when very bad. If you are a developer, you know what to do.', 'On No!')
+      }
+    );
+  };
+
+  $scope.deleteColony = function(account, character, colony) {
+    colony.loading = true;
+    Colony.delete(
+      {accountId: account.id, characterId: character.id, colonyId: colony.id},
+
+      colony,
+
+      function() {
+        colony.loading = false;
+        var colonyIndex = _.findIndex(character.colonies, ['id', colony.id]);
+        character.colonies.splice(colonyIndex, 1);
+        Notifier.success('Your Colony was deleted with success! Are we gonna missing it?', 'Colony Deleted')
+      },
+
+      function(error) {
+        console.log(error);
+        colony.loading = false;
+        Notifier.danger('Something when very bad. If you are a developer, you know what to do.', 'On No!')
       }
 
     )
   };
 
   $scope.calculateRawResource = function(account, character, colony) {
+    colony.loading = true;
     $scope.calculating = true;
     var getObject = {accountId: account.id, characterId: character.id, colonyId: colony.id, calculate: true};
     if (colony.productionTarget !== null) {
@@ -76,6 +105,7 @@ evePlanetaryControllers.controller('ColoniesController', ['$rootScope', '$scope'
       getObject,
 
       function(result) {
+        colony.loading = false;
         colony.productionTarget = parseInt(result.productionTarget);
         _.forEach(colony.refinedCommodities, function(refinedCommodity) {
           _.forEach(refinedCommodity.processedMaterials, function(processedMaterial) {
@@ -88,11 +118,14 @@ evePlanetaryControllers.controller('ColoniesController', ['$rootScope', '$scope'
           });
           $scope.calculating = false;
         });
+        Notifier.success('Calcule is done!', 'Ready!')
       },
 
       function(error) {
-        $scope.calculating = false;
         console.log(error);
+        colony.loading = false;
+        $scope.calculating = false;
+        Notifier.danger('Something when very bad. If you are a developer, you know what to do.', 'On No!')
       }
 
     )

@@ -69,15 +69,19 @@ evePlanetaryServices.service('Notifier', ['$timeout', function($timeout) {
         }
       );
     },
+
     info: function(message, title) {
       this.notify(message, title, 'info');
     },
+
     warning: function(message, title) {
       this.notify(message, title, 'warning');
     },
+
     success: function(message, title) {
       this.notify(message, title, 'success');
     },
+
     danger: function(message, title) {
       this.notify(message, title, 'danger');
     }

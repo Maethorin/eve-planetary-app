@@ -67,9 +67,10 @@
               </div>
             </div>
 
-            <!--div class="col-md-12 save-colony-row">
-              <button type="button" ng-click="saveColony(colony)" class="btn btn-success"><i class="fa fa-save"></i> Save Colony</button>
-            </div-->
+            <div class="col-md-12 save-colony-row">
+              <button type="button" ng-click="deleteColony(account, character, colony)" class="btn btn-danger"><i class="fa" ng-class="{'fa-spinner fa-spin': colony.loading, 'fa-remove': !colony.loading}"></i> Delete Colony</button>
+              <button type="button" ng-click="saveColony(account, character, colony)" class="btn btn-success"><i class="fa" ng-class="{'fa-spinner fa-spin': colony.loading, 'fa-save': !colony.loading}"></i> Save Colony</button>
+            </div>
 
             <div class="col-md-12 calculate-colony-row" ng-class="{'calculating': calculating}">
               <h3>Production target:</h3>

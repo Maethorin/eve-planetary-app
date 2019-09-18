@@ -1,7 +1,6 @@
 'use strict';
 
-evePlanetaryControllers.controller('EVEAuthController', ['$rootScope', 'appConfig', '$interval', '$window', '$scope', 'Account', 'Colony', function($rootScope, appConfig, $interval, $window, $scope, Account, Colony) {
-// http://local-eveplanetary.maethorin.com.br/?code=rsRVfhtsHkCYk31vsameLQ&state=8ca196930b6992#!/eve-auth
+evePlanetaryControllers.controller('EVEAuthController', ['$rootScope', 'appConfig', '$interval', '$window', '$scope', 'Notifier', 'Account', 'Colony', function($rootScope, appConfig, $interval, $window, $scope, Notifier, Account, Colony) {
   $scope.redirecting = false;
   $scope.continueAuthorizing = false;
   $scope.hasAccounts = false;
@@ -80,17 +79,22 @@ evePlanetaryControllers.controller('EVEAuthController', ['$rootScope', 'appConfi
   };
 
   $scope.loadCharacterPlanetaryData = function(account, character) {
+    character.loading = true;
     Colony.save(
       {accountId: account.id, characterId: character.id},
 
       {},
 
       function(result) {
-        console.log(result)
+        console.log(result);
+        character.loading = false;
+        Notifier.success('Planet Loaded', 'Your Planetary Data was loaded with success!')
       },
 
       function(error) {
         console.log(error);
+        character.loading = false;
+        Notifier.danger('On No!', 'Something when very bad. If you are a developer, you know what to do.')
       }
     )
   };
