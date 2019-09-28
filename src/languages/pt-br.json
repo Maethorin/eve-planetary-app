@@ -6,18 +6,26 @@
   "labels": {},
   "messages": {
     "invalidLogin": "Senha ou e-mail inválido.",
+    "createFail": "Deu ruim. me avise!",
+    "createUser": "Crie seu usuário",
+    "cancelCreateUser": "Quero mais não!",
     "lostPassword": "Esqueceu sua senha?",
-    "recoverPassword": "Recupere a sua senha"
+    "recoverPassword": "Recupere a sua senha",
+    "passwordNotMatch": "A senha e a confirmação não batem!",
+    "userCreated": "Seu usuário foi criado. Agora, você pode entrar."
   },
   "placeholders": {
+    "name": "Nome",
     "user": "Usuário",
     "email": "Email",
-    "password": "Senha"
+    "password": "Senha",
+    "confirmPassword": "Confirme a Senha"
   },
   "buttons": {
     "send": "Enviar",
     "back": "Voltar",
     "save": "Salvar",
+    "create": "Criar",
     "login": "Entrar",
     "logout": "Sair",
     "cancel": "Cancelar",

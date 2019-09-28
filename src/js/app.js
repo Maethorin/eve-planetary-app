@@ -142,7 +142,7 @@ evePlanetary.config(['$httpProvider', '$stateProvider', '$locationProvider', '$u
 }]);
 
 evePlanetary.run(['$rootScope', '$http', 'appConfig', 'AuthService', 'MeService', 'TranslateService', function($rootScope, $http, appConfig, AuthService, MeService, TranslateService) {
-  $rootScope.appLanguage = 'pt-BR';
+  $rootScope.appLanguage = 'en-us';
   window.moment.locale($rootScope.appLanguage);
   AuthService.update();
 

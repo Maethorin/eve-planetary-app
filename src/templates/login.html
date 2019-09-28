@@ -2,14 +2,14 @@
   <div class="login-page">
     <div class="form">
       <span class="main-title">EVE Planetary</span>
-      <form ng-if="!formLogin" class="register-form">
+      <form ng-if="formRecover" class="register-form">
         <input type="text" placeholder="{{ translator.translate('placeholders', 'email') }}"/>
         <button><translate section="buttons" text="send"></translate></button>
         <p class="message"><a ng-click="toggleRecoverForm()"><translate section="buttons" text="back"></a></p>
       </form>
 
       <form ng-if="formLogin" name="formLogin" class="login-form" ng-submit="logingIn()" novalidate>
-        <input type="text" placeholder="{{ translator.translate('placeholders', 'user') }}" ng-model="login.username" required/>
+        <input type="text" placeholder="{{ translator.translate('placeholders', 'email') }}" ng-model="login.username" required/>
         <input type="password" placeholder="{{ translator.translate('placeholders', 'password') }}" ng-model="login.password" required/>
         <button class="button" type="submit" ng-disabled="loginLoad">
           <i class="fa" ng-class="{'fa-spinner fa-spin': loginLoad}"></i> <translate section="buttons" text="login"></translate>
@@ -18,7 +18,25 @@
           <a class="close" data-dismiss="alert" aria-label="close">×</a>
           <strong> <translate section="messages" text="invalidLogin"></translate></strong>
         </div>
-        <p class="message"><translate section="messages" text="lostPassword"></translate> <a ng-click="toggleRecoverForm()"><translate section="messages" text="recoverPassword"></translate></a></p>
+        <!--p class="message"><translate section="messages" text="lostPassword"></translate> <a ng-click="toggleRecoverForm()"><translate section="messages" text="recoverPassword"></translate></a></p-->
+        <p class="message"><a ng-click="toggleCreateUser()"><translate section="messages" text="createUser"></translate></a></p>
+        <p class="message" ng-if="userCreated"><translate section="messages" text="userCreated"></translate></p>
+      </form>
+
+      <form ng-if="formCreate" name="formCreate" class="login-form" ng-submit="createNewUser()" novalidate>
+        <input type="text" placeholder="{{ translator.translate('placeholders', 'name') }}" ng-model="newUser.name" required/>
+        <input type="text" placeholder="{{ translator.translate('placeholders', 'email') }}" ng-model="newUser.email" required/>
+        <input type="password" placeholder="{{ translator.translate('placeholders', 'password') }}" ng-model="newUser.password" required/>
+        <input type="password" placeholder="{{ translator.translate('placeholders', 'confirmPassword') }}" ng-model="newUser.confirmPassword" required/>
+        <button class="button" type="submit" ng-disabled="loginLoad">
+          <i class="fa" ng-class="{'fa-spinner fa-spin': loginLoad}"></i> <translate section="buttons" text="create"></translate>
+        </button>
+        <p class="message"><a ng-click="toggleCreateUser()"><translate section="messages" text="cancelCreateUser"></translate></a></p>
+        <div class="alert alert-danger animate-show-hide" ng-if="createFail">
+          <a class="close" data-dismiss="alert" aria-label="close">×</a>
+          <strong ng-if="!passwordNotMatch"> <translate section="messages" text="createFail"></translate></strong>
+          <strong ng-if="passwordNotMatch"> <translate section="messages" text="passwordNotMatch"></translate></strong>
+        </div>
       </form>
     </div>
   </div>

@@ -6,18 +6,26 @@
   "labels": {},
   "messages": {
     "invalidLogin": "Invalid login data",
+    "createFail": "Error, plz call me.",
+    "createUser": "Create your user.",
+    "cancelCreateUser": "Never mind!",
     "lostPassword": "Forgot password?",
-    "recoverPassword": "Recover password"
+    "recoverPassword": "Recover password",
+    "passwordNotMatch": "The password and confirmation do not match!",
+    "userCreated": "Your user is created! Now, you can login."
   },
   "placeholders": {
+    "name": "Name",
     "user": "User",
     "email": "Email",
-    "password": "Password"
+    "password": "Password",
+    "confirmPassword": "Confirm Password"
   },
   "buttons": {
     "send": "Send",
     "back": "Back",
     "save": "Save",
+    "create": "Create",
     "login": "Login",
     "logout": "Logout",
     "cancel": "Cancel",
